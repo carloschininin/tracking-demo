@@ -61,18 +61,27 @@
         <button class="btn-close d-lg-none" type="button" data-coreui-theme="dark" aria-label="Close" onclick="coreui.Sidebar.getInstance(document.querySelector(&quot;#sidebar&quot;)).toggle()"></button>
     </div>
     <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
-        <li class="nav-item"><a class="nav-link" href="index.html">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_home') }}">
                 <svg class="nav-icon">
                     <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-speedometer') }}"></use>
-                </svg> Dashboard<span class="badge badge-sm bg-info ms-auto">NEW</span></a></li>
-        <li class="nav-title">Components</li>
+                </svg> Dashboard
+                <span class="badge badge-sm bg-info ms-auto">NEW</span>
+            </a>
+        </li>
         <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
                 <svg class="nav-icon">
                     <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-puzzle') }}"></use>
                 </svg> Base</a>
             <ul class="nav-group-items compact">
-                <li class="nav-item"><a class="nav-link" href="base/accordion.html"><span class="nav-icon"><span class="nav-icon-bullet"></span></span> Accordion</a></li>
-                <li class="nav-item"><a class="nav-link" href="base/breadcrumb.html"><span class="nav-icon"><span class="nav-icon-bullet"></span></span> Breadcrumb</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_empleado_index') }}">
+                        <span class="nav-icon">
+                            <span class="nav-icon-bullet"></span>
+                        </span> Empleado
+                    </a>
+                </li>
+
             </ul>
         </li>
     </ul>
@@ -103,7 +112,8 @@
                     <div class="vr h-100 mx-2 text-body text-opacity-75"></div>
                 </li>
                 <li class="nav-item dropdown">
-                    <button class="btn btn-link nav-link py-2 px-2 d-flex align-items-center" type="button" aria-expanded="false" data-coreui-toggle="dropdown">
+                    <button class="btn btn-link nav-link py-2 px-2 d-flex align-items-center" type="button" aria-expanded="false"
+                            data-coreui-toggle="dropdown">
                         <svg class="icon icon-lg theme-icon-active">
                             <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-contrast') }}"></use>
                         </svg>

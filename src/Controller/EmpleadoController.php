@@ -27,9 +27,10 @@ final class EmpleadoController extends AbstractController
     {
         $empleado = new Empleado();
         $form = $this->createForm(EmpleadoType::class, $empleado);
-        $form->handleRequest($request);
+        $form->handleRequest($request); // se van llenar los datos del formulario enviado en $empleado
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // muchas acciones para la información del empleado.
             $entityManager->persist($empleado);
             $entityManager->flush();
 

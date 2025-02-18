@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Empleado index{% endblock %}
+{% block title %}Empleado Listado{% endblock %}
 
 {% block body %}
     <h1>Empleado index</h1>
@@ -8,18 +8,18 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nombre</th>
+                <th>#</th>
                 <th>Apellido</th>
+                <th>Nombre</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for empleado in empleados %}
             <tr>
-                <td>{{ empleado.id }}</td>
-                <td>{{ empleado.nombre }}</td>
+                <td>{{ loop.index }}</td>
                 <td>{{ empleado.apellido }}</td>
+                <td>{{ empleado.nombre }}</td>
                 <td>
                     <a href="{{ path('app_empleado_show', {'id': empleado.id}) }}">show</a>
                     <a href="{{ path('app_empleado_edit', {'id': empleado.id}) }}">edit</a>

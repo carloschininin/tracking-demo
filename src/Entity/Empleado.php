@@ -16,8 +16,13 @@ class Empleado
     #[ORM\Column(length: 50)]
     private ?string $nombre = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 70)]
     private ?string $apellido = null;
+
+    public function __toString(): string
+    {
+        return $this->apellido . ', ' . $this->nombre;
+    }
 
     public function getId(): ?int
     {

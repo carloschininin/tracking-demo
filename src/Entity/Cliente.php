@@ -25,6 +25,11 @@ class Cliente
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $direccion = null;
 
+    public function __toString(): string
+    {
+        return $this->apellido . ', ' . $this->nombre;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

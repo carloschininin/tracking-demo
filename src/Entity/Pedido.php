@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PedidoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,10 +30,17 @@ class Pedido
     #[ORM\JoinColumn(nullable: false)]
     private ?Empleado $empleado = null;
 
+    /**
+     * @var Collection<int, PedidoDetalle>
+     */
+    #[ORM\OneToMany(targetEntity: PedidoDetalle::class, mappedBy: 'pedido', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $detalles;
+
     public function __construct()
     {
         $this->fechaRegistro = new \DateTime();
         $this->fechaEnvio = new \DateTime('+1 day');
+        $this->detalles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,6 +92,36 @@ class Pedido
     public function setEmpleado(?Empleado $empleado): static
     {
         $this->empleado = $empleado;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PedidoDetalle>
+     */
+    public function getDetalles(): Collection
+    {
+        return $this->detalles;
+    }
+
+    public function addDetalle(PedidoDetalle $detalle): static
+    {
+        if (!$this->detalles->contains($detalle)) {
+            $this->detalles->add($detalle);
+            $detalle->setPedido($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetalle(PedidoDetalle $detalle): static
+    {
+        if ($this->detalles->removeElement($detalle)) {
+            // set the owning side to null (unless already changed)
+            if ($detalle->getPedido() === $this) {
+                $detalle->setPedido(null);
+            }
+        }
 
         return $this;
     }

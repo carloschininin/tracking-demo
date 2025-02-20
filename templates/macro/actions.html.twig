@@ -20,3 +20,11 @@
             data-collection-holder-id="{{ form.vars.id }}"><i class="fa fa-plus"></i> Agregar
     </button>
 {% endmacro %}
+
+{% macro btn_show(url) %}
+    <a class="btn btn-sm btn-info" href="{{ url }}"><i class="fa fa-search"></i> </a>
+{% endmacro %}
+
+{% macro btn_edit(url) %}
+    <a class="btn btn-sm btn-warning" href="{{ url }}"><i class="fa fa-pencil"></i> </a>
+{% endmacro %}

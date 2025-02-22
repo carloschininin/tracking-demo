@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cargamento index{% endblock %}
+
+{% block body %}
+    <h1>Cargamento index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>FechaPartida</th>
+                <th>Origen</th>
+                <th>Destino</th>
+                <th>Peso Total</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cargamento in cargamentos %}
+            <tr>
+                <td>{{ cargamento.fechaPartida ? cargamento.fechaPartida|date('Y-m-d') : '' }}</td>
+                <td>{{ cargamento.ciudadOrigen }}</td>
+                <td>{{ cargamento.ciudadDestino }}</td>
+                <td>{{ cargamento.pesoTotal }} KG.</td>
+                <td>
+                    <a href="{{ path('app_cargamento_show', {'id': cargamento.id}) }}">show</a>
+                    <a href="{{ path('app_cargamento_edit', {'id': cargamento.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cargamento_new') }}">Create new</a>
+{% endblock %}

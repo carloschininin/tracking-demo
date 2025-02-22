@@ -14,7 +14,8 @@
                 <th>Fecha de Envío</th>
                 <th>DNI Cliente</th>
                 <th>Cliente</th>
-                <th>Empleado</th>
+                <th>Origen</th>
+                <th>Destino</th>
                 <th>Costo</th>
                 <th>actions</th>
             </tr>
@@ -27,7 +28,8 @@
                 <td>{{ pedido.fechaEnvio ? pedido.fechaEnvio|date('Y-m-d') : '' }}</td>
                 <td>{{ pedido.cliente.dni }}</td>
                 <td>{{ pedido.cliente }}</td>
-                <td>{{ pedido.empleado }}</td>
+                <td>{{ pedido.ciudadOrigen }}</td>
+                <td>{{ pedido.ciudadDestino }}</td>
                 <td>{{ pedido.costoTotal }}</td>
                 <td>
 {#                    <a href="{{ path('app_pedido_show', {'id': pedido.id}) }}">show</a>#}

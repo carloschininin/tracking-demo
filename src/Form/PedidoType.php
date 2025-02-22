@@ -40,6 +40,8 @@ class PedidoType extends AbstractType
                 'by_reference' => false,
 //                'prototype_name' => '__detallePedido__',
             ])
+            ->add('ciudadOrigen')
+            ->add('ciudadDestino')
         ;
     }
 

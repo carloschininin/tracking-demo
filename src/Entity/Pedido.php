@@ -42,11 +42,31 @@ class Pedido
     #[ORM\Column(length: 13, nullable: true)]
     private ?string $codigo = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Ciudad $ciudadOrigen = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Ciudad $ciudadDestino = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $asignado = null;
+
     public function __construct()
     {
         $this->fechaRegistro = new \DateTime();
         $this->fechaEnvio = new \DateTime('+1 day');
         $this->detalles = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return
+            $this->getFechaEnvio()->format('d/m/Y'). ' -> '.
+            $this->codigo . ' -> '.
+            $this->ciudadOrigen->getNombre() . ' -> ' .
+            $this->ciudadDestino->getNombre();
     }
 
     public function getId(): ?int
@@ -152,6 +172,42 @@ class Pedido
     public function setCodigo(?string $codigo): static
     {
         $this->codigo = $codigo;
+
+        return $this;
+    }
+
+    public function getCiudadOrigen(): ?Ciudad
+    {
+        return $this->ciudadOrigen;
+    }
+
+    public function setCiudadOrigen(?Ciudad $ciudadOrigen): static
+    {
+        $this->ciudadOrigen = $ciudadOrigen;
+
+        return $this;
+    }
+
+    public function getCiudadDestino(): ?Ciudad
+    {
+        return $this->ciudadDestino;
+    }
+
+    public function setCiudadDestino(?Ciudad $ciudadDestino): static
+    {
+        $this->ciudadDestino = $ciudadDestino;
+
+        return $this;
+    }
+
+    public function isAsignado(): ?bool
+    {
+        return $this->asignado;
+    }
+
+    public function setAsignado(?bool $asignado): static
+    {
+        $this->asignado = $asignado;
 
         return $this;
     }

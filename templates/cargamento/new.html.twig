@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Cargamento{% endblock %}
+
+{% block body %}
+    <h1>Create new Cargamento</h1>
+
+    {{ include('cargamento/_form.html.twig') }}
+
+    <a href="{{ path('app_cargamento_index') }}">back to list</a>
+{% endblock %}

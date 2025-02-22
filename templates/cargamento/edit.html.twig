@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cargamento{% endblock %}
+
+{% block body %}
+    <h1>Edit Cargamento</h1>
+
+    {{ include('cargamento/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_cargamento_index') }}">back to list</a>
+
+    {{ include('cargamento/_delete_form.html.twig') }}
+{% endblock %}

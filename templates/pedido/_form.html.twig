@@ -7,6 +7,8 @@
     {{ form_row(form.empleado) }}
     {{ form_row(form.costoTotal) }}
     {{ actions.collection(form.detalles) }}
+    {{ form_row(form.ciudadOrigen) }}
+    {{ form_row(form.ciudadDestino) }}
 
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

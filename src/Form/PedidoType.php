@@ -30,6 +30,9 @@ class PedidoType extends AbstractType
                 'class' => Empleado::class,
 //                'choice_label' => 'id',
             ])
+            ->add('costoTotal', null, [
+                'required' => true,
+            ])
             ->add('detalles', CollectionType::class, [
                 'entry_type' => PedidoDetalleType::class,
                 'allow_add' => true,

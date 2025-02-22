@@ -36,6 +36,9 @@ class Pedido
     #[ORM\OneToMany(targetEntity: PedidoDetalle::class, mappedBy: 'pedido', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $detalles;
 
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    private ?string $costoTotal = null;
+
     public function __construct()
     {
         $this->fechaRegistro = new \DateTime();
@@ -122,6 +125,18 @@ class Pedido
                 $detalle->setPedido(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCostoTotal(): ?string
+    {
+        return $this->costoTotal;
+    }
+
+    public function setCostoTotal(?string $costoTotal): static
+    {
+        $this->costoTotal = $costoTotal;
 
         return $this;
     }

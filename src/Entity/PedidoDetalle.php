@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PedidoDetalleRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PedidoDetalleRepository::class)]
@@ -22,6 +23,9 @@ class PedidoDetalle
     #[ORM\ManyToOne(inversedBy: 'detalles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Pedido $pedido = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    private ?string $costo = null;
 
     public function getId(): ?int
     {
@@ -60,6 +64,18 @@ class PedidoDetalle
     public function setPedido(?Pedido $pedido): static
     {
         $this->pedido = $pedido;
+
+        return $this;
+    }
+
+    public function getCosto(): ?string
+    {
+        return $this->costo;
+    }
+
+    public function setCosto(?string $costo): static
+    {
+        $this->costo = $costo;
 
         return $this;
     }

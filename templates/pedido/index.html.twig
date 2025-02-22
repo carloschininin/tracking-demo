@@ -9,7 +9,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Código</th>
                 <th>Fecha de Registro</th>
                 <th>Fecha de Envío</th>
                 <th>DNI Cliente</th>
@@ -22,7 +22,7 @@
         <tbody>
         {% for pedido in pedidos %}
             <tr>
-                <td>{{ pedido.id }}</td>
+                <td>{{ pedido.codigo }}</td>
                 <td>{{ pedido.fechaRegistro ? pedido.fechaRegistro|date('Y-m-d') : '' }}</td>
                 <td>{{ pedido.fechaEnvio ? pedido.fechaEnvio|date('Y-m-d') : '' }}</td>
                 <td>{{ pedido.cliente.dni }}</td>

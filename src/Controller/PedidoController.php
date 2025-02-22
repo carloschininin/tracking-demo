@@ -30,6 +30,7 @@ final class PedidoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $pedido->setCodigo(uniqid());
             $entityManager->persist($pedido);
             $entityManager->flush();
 
@@ -57,6 +58,10 @@ final class PedidoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$pedido->getCodigo()) {
+                $pedido->setCodigo(uniqid());
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_pedido_index', [], Response::HTTP_SEE_OTHER);

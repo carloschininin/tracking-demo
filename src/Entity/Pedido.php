@@ -39,6 +39,9 @@ class Pedido
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
     private ?string $costoTotal = null;
 
+    #[ORM\Column(length: 13, nullable: true)]
+    private ?string $codigo = null;
+
     public function __construct()
     {
         $this->fechaRegistro = new \DateTime();
@@ -137,6 +140,18 @@ class Pedido
     public function setCostoTotal(?string $costoTotal): static
     {
         $this->costoTotal = $costoTotal;
+
+        return $this;
+    }
+
+    public function getCodigo(): ?string
+    {
+        return $this->codigo;
+    }
+
+    public function setCodigo(?string $codigo): static
+    {
+        $this->codigo = $codigo;
 
         return $this;
     }

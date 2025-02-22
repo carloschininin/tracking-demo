@@ -26,7 +26,8 @@ class PedidoDetalleType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'class' => 'costo_input',
-                    'placeholder' => '0.00'
+                    'placeholder' => '0.00',
+                    'readonly' => true
                 ]
             ])
         ;

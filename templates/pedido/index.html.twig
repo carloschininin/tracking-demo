@@ -15,6 +15,7 @@
                 <th>DNI Cliente</th>
                 <th>Cliente</th>
                 <th>Empleado</th>
+                <th>Costo</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -27,6 +28,7 @@
                 <td>{{ pedido.cliente.dni }}</td>
                 <td>{{ pedido.cliente }}</td>
                 <td>{{ pedido.empleado }}</td>
+                <td>{{ pedido.costoTotal }}</td>
                 <td>
 {#                    <a href="{{ path('app_pedido_show', {'id': pedido.id}) }}">show</a>#}
                     {{ actions.btn_show(path('app_pedido_show', {'id': pedido.id})) }}

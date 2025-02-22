@@ -15,9 +15,19 @@ class PedidoDetalleType extends AbstractType
     {
         $builder
             ->add('descripcion')
-            ->add('peso')
+            ->add('peso', null, [
+                'required' => true,
+                'attr' => [
+                    'class' => 'peso_input',
+                    'placeholder' => '00'
+                ]
+            ])
             ->add('costo',null, [
                 'required' => true,
+                'attr' => [
+                    'class' => 'costo_input',
+                    'placeholder' => '0.00'
+                ]
             ])
         ;
     }

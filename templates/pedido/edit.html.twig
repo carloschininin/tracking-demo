@@ -24,4 +24,43 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/collection.js') }}"></script>
+    <script>
+        function pesos(peso) {
+            if (peso <= 0) {
+                return 0;
+            }
+            if (peso <= 2) {
+                return 1;
+            }
+            if (peso <= 4) {
+                return 2;
+            }
+            if (peso <= 8) {
+                return 4;
+            }
+
+            return 10;
+        }
+
+        function calcularCostoTotal() {
+            let suma = 0.00;
+            $('.costo_input').each(function () {
+                let valor = parseFloat($(this).val());
+                suma += valor;
+            });
+
+            $('#pedido_costoTotal').val(suma);
+        }
+
+        $(document).ready(function() {
+            $(document).on('change', '.peso_input', function() {
+                let peso = parseFloat($(this).val());
+                let costo = pesos(peso);
+                const costoInput = $(this).closest('.collection_item').find('.costo_input');
+                costoInput.val(costo);
+
+                calcularCostoTotal();
+            });
+        })
+    </script>
 {% endblock %}

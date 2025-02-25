@@ -12,6 +12,8 @@
                 <th>Origen</th>
                 <th>Destino</th>
                 <th>Peso Total</th>
+                <th>Vehiculo</th>
+                <th>Chofer</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +24,8 @@
                 <td>{{ cargamento.ciudadOrigen }}</td>
                 <td>{{ cargamento.ciudadDestino }}</td>
                 <td>{{ cargamento.pesoTotal }} KG.</td>
+                <td>{{ cargamento.vehiculo }}</td>
+                <td>{{ cargamento.chofer.nombre }}</td>
                 <td>
                     <a href="{{ path('app_cargamento_show', {'id': cargamento.id}) }}">show</a>
                     <a href="{{ path('app_cargamento_edit', {'id': cargamento.id}) }}">edit</a>

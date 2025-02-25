@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chofer index{% endblock %}
+
+{% block body %}
+    <h1>Chofer index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Dni</th>
+                <th>Licencia</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for chofer in chofers %}
+            <tr>
+                <td>{{ chofer.id }}</td>
+                <td>{{ chofer.nombre }}</td>
+                <td>{{ chofer.dni }}</td>
+                <td>{{ chofer.licencia }}</td>
+                <td>
+                    <a href="{{ path('app_chofer_show', {'id': chofer.id}) }}">show</a>
+                    <a href="{{ path('app_chofer_edit', {'id': chofer.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_chofer_new') }}">Create new</a>
+{% endblock %}

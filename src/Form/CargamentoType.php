@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Cargamento;
+use App\Entity\Chofer;
 use App\Entity\Ciudad;
 use App\Entity\Pedido;
+use App\Entity\Vehiculo;
 use App\Repository\CargamentoRepository;
 use App\Repository\PedidoRepository;
 use Doctrine\ORM\EntityRepository;
@@ -40,6 +42,12 @@ class CargamentoType extends AbstractType
                 'query_builder' => function (PedidoRepository $repository) use ($pedidoIds) {
                     return $repository->disponiblesParaCargamento($pedidoIds);
                 }
+            ])
+            ->add('vehiculo', EntityType::class, [
+                'class' => Vehiculo::class,
+            ])
+            ->add('chofer', EntityType::class, [
+                'class' => Chofer::class,
             ])
         ;
     }

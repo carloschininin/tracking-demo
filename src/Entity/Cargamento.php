@@ -33,6 +33,12 @@ class Cargamento
     #[ORM\ManyToMany(targetEntity: Pedido::class)]
     private Collection $pedidos;
 
+    #[ORM\ManyToOne]
+    private ?Vehiculo $vehiculo = null;
+
+    #[ORM\ManyToOne]
+    private ?Chofer $chofer = null;
+
     public function __construct()
     {
         $this->pedidos = new ArrayCollection();
@@ -113,5 +119,29 @@ class Cargamento
         }
 
         return $total;
+    }
+
+    public function getVehiculo(): ?Vehiculo
+    {
+        return $this->vehiculo;
+    }
+
+    public function setVehiculo(?Vehiculo $vehiculo): static
+    {
+        $this->vehiculo = $vehiculo;
+
+        return $this;
+    }
+
+    public function getChofer(): ?Chofer
+    {
+        return $this->chofer;
+    }
+
+    public function setChofer(?Chofer $chofer): static
+    {
+        $this->chofer = $chofer;
+
+        return $this;
     }
 }

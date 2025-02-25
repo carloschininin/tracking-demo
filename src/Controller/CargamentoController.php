@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cargamento;
 use App\Form\CargamentoType;
 use App\Repository\CargamentoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,10 +59,31 @@ final class CargamentoController extends AbstractController
     #[Route('/{id}/edit', name: 'app_cargamento_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Cargamento $cargamento, EntityManagerInterface $entityManager): Response
     {
+        // copia de los pedidos
+        $pedidosAnteriores = new ArrayCollection();
+        foreach ($cargamento->getPedidos() as $pedido) {
+            $pedidosAnteriores->add($pedido);
+        }
+
         $form = $this->createForm(CargamentoType::class, $cargamento);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Los pedidos que han sido retirados
+            foreach ($pedidosAnteriores as $pedidoAnterior) {
+                if (false === $cargamento->getPedidos()->contains($pedidoAnterior)) {
+                    $pedidoAnterior->setAsignado(false);
+                    $entityManager->persist($pedidoAnterior);
+                }
+            }
+
+            // Los nuevos pedidos seleccionados
+            foreach ($cargamento->getPedidos() as $pedido) {
+                $pedido->setAsignado(true);
+                $entityManager->persist($pedido);
+            }
+
+            // Grabar en BD
             $entityManager->flush();
 
             return $this->redirectToRoute('app_cargamento_index', [], Response::HTTP_SEE_OTHER);

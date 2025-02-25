@@ -16,28 +16,14 @@ class CargamentoRepository extends ServiceEntityRepository
         parent::__construct($registry, Cargamento::class);
     }
 
-    //    /**
-    //     * @return Cargamento[] Returns an array of Cargamento objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Cargamento
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function idsCargamento(?int $cargamentoId): array
+    {
+        return $this->createQueryBuilder('cargamento')
+            ->select('pedidos.id')
+            ->join('cargamento.pedidos', 'pedidos')
+            ->where('cargamento.id = :id')
+            ->setParameter('id', $cargamentoId)
+            ->getQuery()
+            ->getSingleColumnResult();
+    }
 }

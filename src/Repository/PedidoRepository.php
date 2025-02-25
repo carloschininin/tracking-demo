@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Pedido;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,28 +17,22 @@ class PedidoRepository extends ServiceEntityRepository
         parent::__construct($registry, Pedido::class);
     }
 
-    //    /**
-    //     * @return Pedido[] Returns an array of Pedido objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function disponiblesParaCargamento(array $pedidoIds): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('pedido')
+            ->select('pedido')
+            ->andWhere('pedido.asignado is null or pedido.asignado = false')
+            ->orderBy('pedido.fechaRegistro', 'ASC')
+        ;
 
-    //    public function findOneBySomeField($value): ?Pedido
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        // Solo es para las ediciones de cargamento
+        if (!empty($pedidoIds)) {
+            $expr = $queryBuilder->expr();
+            $queryBuilder
+                ->orWhere($expr->in('pedido.id', $pedidoIds));
+        }
+        //
+
+        return $queryBuilder;
+    }
 }

@@ -99,6 +99,12 @@ final class CargamentoController extends AbstractController
     public function delete(Request $request, Cargamento $cargamento, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$cargamento->getId(), $request->getPayload()->getString('_token'))) {
+            // Pedidos vuelven a tener su disponible en falso.
+            foreach ($cargamento->getPedidos() as $pedido) {
+                $pedido->setAsignado(false);
+                $entityManager->persist($pedido);
+            }
+            //
             $entityManager->remove($cargamento);
             $entityManager->flush();
         }

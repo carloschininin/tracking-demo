@@ -50,6 +50,7 @@
     {% endblock %}
 </head>
 <body>
+{% block body_main %}
 <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
     <div class="sidebar-header border-bottom">
         <div class="sidebar-brand">
@@ -243,6 +244,7 @@
         <div class="ms-auto">Powered by&nbsp;<a href="https://coreui.io/docs/">CoreUI UI Components</a></div>
     </footer>
 </div>
+{% endblock body_main %}
 <!-- CoreUI and necessary plugins-->
 <script src="{{ asset('vendors/@coreui/coreui/js/coreui.bundle.min.js') }}"></script>
 <script src="{{ asset('vendors/simplebar/js/simplebar.min.js') }}"></script>
@@ -255,8 +257,5 @@
         }
     });
 </script>
-<script>
-</script>
-
 </body>
 </html>

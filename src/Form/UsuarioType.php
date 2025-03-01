@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Empleado;
 use App\Entity\Usuario;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,6 +19,11 @@ class UsuarioType extends AbstractType
             ->add('username', TextType::class)
             ->add('password', PasswordType::class, [
                 'required' => false,
+            ])
+            ->add('empleado', EntityType::class, [
+                'class' => Empleado::class,
+                'required' => false,
+                'placeholder' => 'Seleccione un Empleado ...',
             ])
         ;
     }

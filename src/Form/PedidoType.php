@@ -26,10 +26,6 @@ class PedidoType extends AbstractType
                 'class' => Cliente::class,
 //                'choice_label' => 'dni',
             ])
-            ->add('empleado', EntityType::class, [
-                'class' => Empleado::class,
-//                'choice_label' => 'id',
-            ])
             ->add('costoTotal', null, [
                 'required' => true,
             ])

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Pedido;
+use App\Entity\Usuario;
 use App\Form\PedidoType;
 use App\Repository\PedidoRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,6 +32,9 @@ final class PedidoController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pedido->setCodigo(uniqid());
+            /** @var Usuario $usuarioActual */
+            $usuarioActual = $this->getUser();
+            $pedido->setEmpleado($usuarioActual->getEmpleado());
             $entityManager->persist($pedido);
             $entityManager->flush();
 
@@ -61,6 +65,10 @@ final class PedidoController extends AbstractController
             if (!$pedido->getCodigo()) {
                 $pedido->setCodigo(uniqid());
             }
+
+            /** @var Usuario $usuarioActual */
+            $usuarioActual = $this->getUser();
+            $pedido->setEmpleado($usuarioActual->getEmpleado());
 
             $entityManager->flush();
 

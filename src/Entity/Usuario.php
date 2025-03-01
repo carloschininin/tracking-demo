@@ -31,6 +31,9 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?string $password = null;
 
+    #[ORM\ManyToOne]
+    private ?Empleado $empleado = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,5 +107,17 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getEmpleado(): ?Empleado
+    {
+        return $this->empleado;
+    }
+
+    public function setEmpleado(?Empleado $empleado): static
+    {
+        $this->empleado = $empleado;
+
+        return $this;
     }
 }

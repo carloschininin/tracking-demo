@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Username</th>
                 <th>Roles</th>
+                <th>Empleado</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td>{{ usuario.id }}</td>
                 <td>{{ usuario.username }}</td>
                 <td>{{ usuario.roles ? usuario.roles|json_encode : '' }}</td>
+                <td>{{ usuario.empleado }}</td>
                 <td>
                     <a href="{{ path('app_usuario_show', {'id': usuario.id}) }}">show</a>
                     <a href="{{ path('app_usuario_edit', {'id': usuario.id}) }}">edit</a>

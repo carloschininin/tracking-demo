@@ -54,12 +54,22 @@ final class UsuarioController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_usuario_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Usuario $usuario, EntityManagerInterface $entityManager): Response
-    {
+    public function edit(
+        Request $request,
+        Usuario $usuario,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $hasher,
+    ): Response {
+        $passwordDefault = $usuario->getPassword();
         $form = $this->createForm(UsuarioType::class, $usuario);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (null !== $usuario->getPassword()) {
+                $passwordDefault = $hasher->hashPassword($usuario, $usuario->getPassword());
+            }
+
+            $usuario->setPassword($passwordDefault);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_usuario_index', [], Response::HTTP_SEE_OTHER);

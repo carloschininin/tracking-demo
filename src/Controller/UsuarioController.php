@@ -65,6 +65,14 @@ final class UsuarioController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (null !== $usuario->getPasswordActual() && !password_verify($usuario->getPasswordActual(), $passwordDefault)) {
+                return $this->render('usuario/edit.html.twig', [
+                    'usuario' => $usuario,
+                    'form' => $form,
+                    'message' => 'Contraseña actual no coincide',
+                ]);
+            }
+
             if (null !== $usuario->getPassword()) {
                 $passwordDefault = $hasher->hashPassword($usuario, $usuario->getPassword());
             }

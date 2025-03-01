@@ -34,6 +34,8 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne]
     private ?Empleado $empleado = null;
 
+    private ?string $passwordActual = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,5 +121,15 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
         $this->empleado = $empleado;
 
         return $this;
+    }
+
+    public function getPasswordActual(): ?string
+    {
+        return $this->passwordActual;
+    }
+
+    public function setPasswordActual(?string $passwordActual): void
+    {
+        $this->passwordActual = $passwordActual;
     }
 }

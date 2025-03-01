@@ -4,6 +4,9 @@
 
 {% block body %}
     <h1>Edit Usuario</h1>
+    {% if message is defined %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endif %}
 
     {{ include('usuario/_form.html.twig', {'button_label': 'Update'}) }}
 
